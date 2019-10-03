@@ -8,10 +8,15 @@ namespace Venkos.NHibernate
     interface IMapperSession<T>
     {
         void BeginTransaction();
+
         Task Commit();
+
         Task Rollback();
+
         void CloseTransaction();
+
         Task Save(T entity);
+
         Task Delete(T entity);
 
         IQueryable<T> Books { get; }
