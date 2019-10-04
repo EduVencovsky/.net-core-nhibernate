@@ -52,8 +52,8 @@ namespace Venkos.Data.Repository
             using (var transaction = Session.BeginTransaction())
             {
                 Session.Delete(entity);                
-                transaction.Commit();
                 Flush();
+                transaction.Commit();
             }
         }
 

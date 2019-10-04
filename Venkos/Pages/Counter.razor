@@ -1,51 +1,50 @@
 ﻿@page "/counter"
-@inject IBookService BookService
+@inject IAuthorService AuthorService
 
 <h1>Counter</h1>
 
 <p>Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="GetBooks">Show</button>
+<button class="btn btn-primary" @onclick="GetAuthors">Show</button>
 
 <input 
-    @bind-value="CurrentBook.Title"
+    @bind-value="CurrentAuthor.Name"
     @bind-value:event="oninput"
 />
-<button class="btn btn-primary" @onclick="AddBook">Add</button>
+<button class="btn btn-primary" @onclick="AddAuthor">Add</button>
 
-@foreach (var book in Books)
+@foreach (var author in Authors)
 {
     <div>
-        @book.Title
-        <button class="btn btn-primary" @onclick="() => RemoveBook(book)">Remove</button>
+        @author.Name
+        <button class="btn btn-primary" @onclick="() => RemoveAuthor(author)">Remove</button>
     </div>
 }
 
 @code {
     int currentCount = 0;
 
-    Book CurrentBook = new Book();
+    Author CurrentAuthor = new Author();
 
-    IEnumerable<Book> Books = new List<Book>();
+    IEnumerable<Author> Authors = new List<Author>();
 
-    void GetBooks()
+    void GetAuthors()
     {
-        Books = BookService.GetBooks();
+        Authors = AuthorService.GetAuthors();
     }
 
-    void AddBook()
+    void AddAuthor()
     {
-        if (!string.IsNullOrWhiteSpace(CurrentBook.Title))
+        if (!string.IsNullOrWhiteSpace(CurrentAuthor.Name))
         {
-            CurrentBook.Id = Guid.NewGuid();
-            BookService.AddBook(CurrentBook);
-            CurrentBook = new Book();
+            AuthorService.AddAuthor(CurrentAuthor);
+            CurrentAuthor = new Author();
         }
     }
 
-    void RemoveBook(Book book){
-        BookService.DeleteBook(book);
-        GetBooks();
+    void RemoveAuthor(Author author){
+        AuthorService.DeleteAuthor(author);
+        GetAuthors();
     }
 
 }

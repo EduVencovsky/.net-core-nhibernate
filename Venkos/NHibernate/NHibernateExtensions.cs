@@ -4,6 +4,7 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Venkos.NHibernate
             var mapper = new ModelMapper();
             mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
             HbmMapping domainMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-
+            
             var configuration = new Configuration()
                 .DataBaseIntegration(c =>
                 {
@@ -36,12 +37,13 @@ namespace Venkos.NHibernate
             var fluentSessionFactory = Fluently
                 .Configure(configuration)
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Book>())
+                //.ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
                 .BuildSessionFactory();
 
             var sessionFactory = configuration.BuildSessionFactory();
 
             services.AddSingleton(fluentSessionFactory);
-            services.AddScoped(factory => fluentSessionFactory.OpenSession());
+            services.AddSingleton(factory => fluentSessionFactory.OpenSession());
             services.AddScoped<ISessionManager, SessionManager>();
 
             return services;
