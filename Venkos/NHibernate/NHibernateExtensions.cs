@@ -34,6 +34,7 @@ namespace Venkos.NHibernate
 
             services.AddSingleton(sessionFactory);
             services.AddScoped(factory => sessionFactory.OpenSession());
+            services.AddScoped<ISessionManager, SessionManager>();
 
             return services;
         }

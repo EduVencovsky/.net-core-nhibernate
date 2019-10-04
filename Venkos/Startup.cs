@@ -8,7 +8,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Venkos.Business;
 using Venkos.Data;
+using Venkos.Data.Repository;
+using Venkos.Domain.Business;
+using Venkos.Domain.Repository;
 using Venkos.NHibernate;
 
 namespace Venkos
@@ -32,6 +36,9 @@ namespace Venkos
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddNHibernate(connStr);
+
+            services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IBookService, BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

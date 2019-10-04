@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace Venkos.NHibernate
 {
-    public class NHibernateMapperSession<T> : IMapperSession<T>
-    {
+    public class SessionManager : ISessionManager
+    { 
+    
         private readonly ISession _session;
         private ITransaction _transaction;
 
-        public NHibernateMapperSession(ISession session)
+        public SessionManager(ISession session)
         {
             _session = session;
         }
-
-        public IQueryable<T> Books => _session.Query<T>();
 
         public void BeginTransaction()
         {
@@ -42,14 +41,5 @@ namespace Venkos.NHibernate
             }
         }
 
-        public async Task Save(T entity)
-        {
-            await _session.SaveOrUpdateAsync(entity);
-        }
-
-        public async Task Delete(T entity)
-        {
-            await _session.DeleteAsync(entity);
-        }
     }
 }

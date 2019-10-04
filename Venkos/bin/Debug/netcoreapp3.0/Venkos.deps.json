@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.0": {
       "Venkos/1.0.0": {
         "dependencies": {
+          "FluentNHibernate": "2.1.2",
           "NHibernate": "5.2.6",
           "System.Data.SqlClient": "4.7.0",
           "Microsoft.AspNetCore.Antiforgery": "3.0.0.0",
@@ -328,6 +329,20 @@
         },
         "compile": {
           "lib/netstandard1.1/Antlr3.Runtime.dll": {}
+        }
+      },
+      "FluentNHibernate/2.1.2": {
+        "dependencies": {
+          "NHibernate": "5.2.6"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/FluentNHibernate.dll": {
+            "assemblyVersion": "2.1.2.0",
+            "fileVersion": "2.1.2.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.0/FluentNHibernate.dll": {}
         }
       },
       "Iesi.Collections/4.0.4": {
@@ -2913,6 +2928,13 @@
       "sha512": "sha512-ZwCEpLCLZXkjzf1lYEixp9hgVlYYk33ACHn6xjFyVhGRi2BpoYQez0qtatbetdylASWYTG+cGz0CGR4z66JM4w==",
       "path": "antlr3.runtime/3.5.1",
       "hashPath": "antlr3.runtime.3.5.1.nupkg.sha512"
+    },
+    "FluentNHibernate/2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JcSxfsgciJQJDEWGYp1tur4XIEBRYpWquDihFZZhFP0yF1UuXwvC/UxNGawQArw6PpLAaVDJdLZPH1Ot8+8DHQ==",
+      "path": "fluentnhibernate/2.1.2",
+      "hashPath": "fluentnhibernate.2.1.2.nupkg.sha512"
     },
     "Iesi.Collections/4.0.4": {
       "type": "package",

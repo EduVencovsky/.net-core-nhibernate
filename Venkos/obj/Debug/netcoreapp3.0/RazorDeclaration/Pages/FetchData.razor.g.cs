@@ -77,6 +77,27 @@ using Venkos.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 10 "C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\_Imports.razor"
+using Venkos.Business;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\_Imports.razor"
+using Venkos.Domain.Model;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\_Imports.razor"
+using Venkos.Domain.Business;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\Pages\FetchData.razor"
 using Venkos.Data;
 

@@ -1,6 +1,7 @@
 ﻿using NHibernate;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace Venkos.Data.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T>
     {
-        public virtual IQueryable<T> Queryable => Session.Query<T>();
+        public IQueryable<T> Queryable => Session.Query<T>();
+
+        protected IsolationLevel IsolationLevel => IsolationLevel.ReadCommitted;
 
         protected ISessionFactory SessionFactory { get; }
 
-        protected ISession Session => SessionFactory.GetCurrentSession();
+        protected ISession Session => SessionFactory.OpenSession();
 
         public BaseRepository(ISessionFactory sessionFactory)
         {
@@ -23,7 +26,12 @@ namespace Venkos.Data.Repository
 
         public void Add(T entity)
         {
-            Session.Save(entity);
+            using (var transaction = Session.BeginTransaction(IsolationLevel))
+            {       
+                Session.Save(entity);
+                transaction.Commit();
+                Session.Close();
+            }
         }
 
         public void Add(IEnumerable<T> entities)

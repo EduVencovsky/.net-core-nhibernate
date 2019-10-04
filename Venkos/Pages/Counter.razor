@@ -1,16 +1,43 @@
 ﻿@page "/counter"
+@inject IBookService BookService
 
 <h1>Counter</h1>
 
 <p>Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="GetBooks">Show</button>
+
+<input 
+    @bind-value="CurrentBook.Title"
+    @bind-value:event="oninput"
+/>
+<button class="btn btn-primary" @onclick="AddBook">Add</button>
+
+@foreach (var book in Books)
+{
+    <div>@book.Title</div>
+}
 
 @code {
     int currentCount = 0;
 
-    void IncrementCount()
+    Book CurrentBook = new Book();
+
+    IEnumerable<Book> Books = new List<Book>();
+
+    void GetBooks()
     {
-        currentCount++;
+        Books = BookService.GetBooks();
     }
+
+    void AddBook()
+    {
+        if (!string.IsNullOrWhiteSpace(CurrentBook.Title))
+        {
+            CurrentBook.Id = Guid.NewGuid();
+            BookService.AddBook(CurrentBook);
+            CurrentBook = new Book();
+        }
+    }
+
 }

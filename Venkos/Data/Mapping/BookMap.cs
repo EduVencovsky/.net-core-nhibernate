@@ -13,11 +13,13 @@ namespace Venkos.Data.Mapping
     {
         public BookMap()
         {
+            Table("BOOK");
+
             Id(x => x.Id, x =>
             {
                 x.Generator(Generators.Guid);
                 x.Type(NHibernateUtil.Guid);
-                x.Column("Id");
+                x.Column("ID");
                 x.UnsavedValue(Guid.Empty);
             });
 
@@ -25,10 +27,9 @@ namespace Venkos.Data.Mapping
             {
                 x.Length(50);
                 x.Type(NHibernateUtil.StringClob);
+                x.Column("TITLE");
                 x.NotNullable(true);
             });
-
-            Table("Books");
         }
     }
 }

@@ -6,7 +6,7 @@ using Venkos.Domain.Model;
 
 namespace Venkos.Domain.Repository
 {
-    public interface IBookRepository
+    public interface IBookRepository : IBaseRepository<Book>
     {
         Book GetByTitle(string title);
     }

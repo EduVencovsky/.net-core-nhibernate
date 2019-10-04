@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Venkos.NHibernate
 {
-    interface IMapperSession<T>
+    interface ISessionManager
     {
         void BeginTransaction();
 
@@ -14,11 +14,5 @@ namespace Venkos.NHibernate
         Task Rollback();
 
         void CloseTransaction();
-
-        Task Save(T entity);
-
-        Task Delete(T entity);
-
-        IQueryable<T> Books { get; }
     }
 }
