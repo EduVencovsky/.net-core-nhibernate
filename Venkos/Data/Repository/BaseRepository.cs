@@ -26,11 +26,11 @@ namespace Venkos.Data.Repository
 
         public void Add(T entity)
         {
-            using (var transaction = Session.BeginTransaction(IsolationLevel))
-            {       
+            using (var transaction = Session.BeginTransaction())
+            {
                 Session.Save(entity);
                 transaction.Commit();
-                Session.Close();
+                Flush();
             }
         }
 
@@ -48,7 +48,14 @@ namespace Venkos.Data.Repository
 
         public long Count(Expression<Func<T, bool>> filter) => Queryable.Where(filter).Count();
 
-        public void Delete(T entity) => Session.Delete(entity);
+        public void Delete(T entity){
+            using (var transaction = Session.BeginTransaction())
+            {
+                Session.Delete(entity);                
+                transaction.Commit();
+                Flush();
+            }
+        }
 
         public void Delete(IEnumerable<T> entities)
         {
@@ -73,6 +80,8 @@ namespace Venkos.Data.Repository
         public IEnumerable<T> Find(Expression<Func<T, bool>> filter) => Queryable.Where(filter).ToList();
 
         public void Flush() => Session.Flush();
+
+        public void Close() => Session.Close();
 
         public T Get(object id) => Session.Get<T>(id);
 

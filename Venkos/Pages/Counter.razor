@@ -15,7 +15,10 @@
 
 @foreach (var book in Books)
 {
-    <div>@book.Title</div>
+    <div>
+        @book.Title
+        <button class="btn btn-primary" @onclick="() => RemoveBook(book)">Remove</button>
+    </div>
 }
 
 @code {
@@ -38,6 +41,11 @@
             BookService.AddBook(CurrentBook);
             CurrentBook = new Book();
         }
+    }
+
+    void RemoveBook(Book book){
+        BookService.DeleteBook(book);
+        GetBooks();
     }
 
 }

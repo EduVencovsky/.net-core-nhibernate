@@ -13,5 +13,7 @@ namespace Venkos.Domain.Business
         void AddBook(Book book);
 
         IEnumerable<Book> Get();
+
+        void DeleteBook(Book book);
     }
 }

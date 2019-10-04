@@ -59,3 +59,4 @@ C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\obj\Debug\n
 C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\obj\Debug\netcoreapp3.0\Razor\Shared\MainLayout.razor.g.cs
 C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\obj\Debug\netcoreapp3.0\Razor\Shared\NavMenu.razor.g.cs
 C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\obj\Debug\netcoreapp3.0\Razor\_Imports.razor.g.cs
+C:\Users\eduardo.vencovsky.GATEC\CourseProjects\dotnet\Venkos\Venkos\obj\Debug\netcoreapp3.0\Venkos.csprojAssemblyReference.cache

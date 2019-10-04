@@ -11,17 +11,19 @@ namespace Venkos.Business
 {
     public class BookService : IBookService
     {
-        protected IBookRepository _bookRepository { get; set; }
+        protected IBookRepository BookRepository { get; set; }
 
         public BookService(IBookRepository bookRepository)
         {
-            _bookRepository = bookRepository;
+            BookRepository = bookRepository;
         }
 
-        public IEnumerable<Book> GetBooks() => _bookRepository.Queryable.ToList();
+        public IEnumerable<Book> GetBooks() => BookRepository.Queryable.ToList();
 
-        public void AddBook(Book book) => _bookRepository.Add(book);
+        public IEnumerable<Book> Get() => BookRepository.Find();
+        
+        public void AddBook(Book book) => BookRepository.Add(book);
 
-        public IEnumerable<Book> Get() => _bookRepository.Find();
+        public void DeleteBook(Book book) => BookRepository.Delete(book);
     }
 }
