@@ -9,17 +9,15 @@ using Venkos.Domain.Model;
 
 namespace Venkos.Data.Mapping
 {
-    public class AuthorMap : ClassMap<Book>
+    public class AuthorMap : ClassMap<Author>
     {
         public AuthorMap()
         {
             Table("AUTHOR");
 
-            Id(x => x.Id).Column("ID").CustomType<long>()
-                .GeneratedBy.Custom<global::NHibernate.Id.IdentityGenerator>()
-                .UnsavedValue(null);
+            Id(x => x.Id).Column("ID").GeneratedBy.Identity();
 
-            Map(b => b.Title).Column("NAME").Length(50).Not.Nullable();
+            Map(b => b.Name).Column("NAME").Length(50).Not.Nullable();
         }
     }
 }

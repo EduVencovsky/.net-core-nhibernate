@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Venkos.Domain.Repository;
 
 namespace Venkos.Data.Repository
@@ -17,20 +16,21 @@ namespace Venkos.Data.Repository
 
         protected ISessionFactory SessionFactory { get; }
 
-        protected ISession Session => SessionFactory.OpenSession();
+        protected ISession Session { get; set; }
 
         public BaseRepository(ISessionFactory sessionFactory)
         {
             SessionFactory = sessionFactory;
+            Session = sessionFactory.OpenSession();
         }
-
+        
         public void Add(T entity)
         {
             using (var transaction = Session.BeginTransaction())
             {
                 Session.Save(entity);
+                Session.Flush();
                 transaction.Commit();
-                Flush();
             }
         }
 

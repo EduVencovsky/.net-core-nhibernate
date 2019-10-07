@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
@@ -36,12 +37,12 @@ namespace Venkos.NHibernate
             configuration.AddMapping(domainMapping);
             var fluentSessionFactory = Fluently
                 .Configure(configuration)
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Book>())
+                .Database(MsSqlConfiguration.MsSql7.ConnectionString(connectionString))
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Author>())
                 //.ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
                 .BuildSessionFactory();
 
             var sessionFactory = configuration.BuildSessionFactory();
-
             services.AddSingleton(fluentSessionFactory);
             services.AddSingleton(factory => fluentSessionFactory.OpenSession());
             services.AddScoped<ISessionManager, SessionManager>();

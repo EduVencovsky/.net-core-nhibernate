@@ -33,12 +33,21 @@
         Authors = AuthorService.GetAuthors();
     }
 
+    void EditAuthor()
+    {
+        if (CurrentAuthor.Id > 0)
+        {
+
+        }
+    }
+
     void AddAuthor()
     {
         if (!string.IsNullOrWhiteSpace(CurrentAuthor.Name))
         {
             AuthorService.AddAuthor(CurrentAuthor);
             CurrentAuthor = new Author();
+            GetAuthors();
         }
     }
 
@@ -47,4 +56,8 @@
         GetAuthors();
     }
 
+    protected override async Task OnInitializedAsync()
+    { 
+        GetAuthors();      
+    }
 }
